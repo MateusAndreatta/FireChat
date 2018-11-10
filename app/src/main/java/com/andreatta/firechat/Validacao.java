@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.HashMap;
 
@@ -60,6 +61,10 @@ public class Validacao extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(Validacao.this, "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
+
+                    FirebaseUser usuarioFirebase = task.getResult().getUser();
+                    usuario.setId( usuarioFirebase.getUid() );
+                    usuario.salvar();
                 }else{
                     Toast.makeText(Validacao.this, "Problemas ao realizar o cadastro", Toast.LENGTH_SHORT).show();
                 }
