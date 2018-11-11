@@ -14,6 +14,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.HashMap;
@@ -61,12 +64,35 @@ public class Validacao extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     Toast.makeText(Validacao.this, "Cadastrado com sucesso", Toast.LENGTH_SHORT).show();
-
                     FirebaseUser usuarioFirebase = task.getResult().getUser();
                     usuario.setId( usuarioFirebase.getUid() );
                     usuario.salvar();
+
+                    /* O usuario já está logado
+                        Pode-se redirecionar ele para a tela principal
+                        Realizando signOut somente para teste
+                     * */
+
+                    auth.signOut();
+                    finish();
                 }else{
-                    Toast.makeText(Validacao.this, "Problemas ao realizar o cadastro", Toast.LENGTH_SHORT).show();
+
+                    String erro = "" ;
+
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthWeakPasswordException e) {
+                        erro = "Senha muito fraca";
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                        erro = "E-mail inválido";
+                    } catch (FirebaseAuthUserCollisionException e) {
+                        erro = "Esse e-mail já está em uso!";
+                    } catch (Exception e) {
+                        erro = "Erro ao cadastrar usuário";
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(Validacao.this, "Problemas ao cadastrar", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Validacao.this, erro, Toast.LENGTH_SHORT).show();
                 }
             }
         });

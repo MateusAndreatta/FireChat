@@ -30,7 +30,7 @@
                 tools:layout_editor_absoluteY="81dp">
 
                 <EditText
-                    android:id="@+id/campoNome"
+                    android:id="@+id/campoEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -56,7 +56,7 @@
                     app:srcCompat="@drawable/firebaselogo" />
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/buttonEntrar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -64,13 +64,13 @@
                     android:backgroundTint="@color/colorAccent"
                     android:text="Entrar"
                     android:textColor="@android:color/background_light"
-                    app:layout_constraintEnd_toEndOf="@+id/editText3"
+                    app:layout_constraintEnd_toEndOf="@+id/campoSenha"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText3" />
+                    app:layout_constraintTop_toBottomOf="@+id/campoSenha" />
 
                 <EditText
-                    android:id="@+id/editText3"
+                    android:id="@+id/campoSenha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
@@ -81,7 +81,7 @@
                     android:inputType="textPassword"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/campoNome" />
+                    app:layout_constraintTop_toBottomOf="@+id/campoEmail" />
 
                 <TextView
                     android:id="@+id/textView2"
@@ -90,8 +90,8 @@
                     android:onClick="irCadastro"
                     android:text="Cadastrar"
                     android:textSize="18sp"
-                    app:layout_constraintBaseline_toBaselineOf="@+id/button"
-                    app:layout_constraintStart_toStartOf="@+id/editText3" />
+                    app:layout_constraintBaseline_toBaselineOf="@+id/buttonEntrar"
+                    app:layout_constraintStart_toStartOf="@+id/campoSenha" />
 
             </android.support.constraint.ConstraintLayout>
 
